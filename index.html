@@ -1,0 +1,409 @@
+import React from "react";
+import { motion } from "motion/react";
+import { 
+  GraduationCap, 
+  BookOpen, 
+  CheckCircle, 
+  Phone, 
+  Mail, 
+  MapPin, 
+  ArrowRight,
+  Star,
+  Award,
+  Users,
+  Clock
+} from "lucide-react";
+import { cn } from "@/src/lib/utils";
+
+const SectionHeading = ({ children, className }: { children: React.ReactNode, className?: string }) => (
+  <motion.h2 
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    className={cn("text-3xl md:text-4xl font-bold text-slate-900 mb-4", className)}
+  >
+    {children}
+  </motion.h2>
+);
+
+const ServiceCard = ({ icon: Icon, title, description, delay }: { icon: any, title: string, description: string, delay: number }) => (
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay }}
+    className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
+  >
+    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+      <Icon size={24} />
+    </div>
+    <h3 className="text-xl font-bold text-slate-900 mb-3">{title}</h3>
+    <p className="text-slate-600 leading-relaxed">{description}</p>
+  </motion.div>
+);
+
+export default function App() {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <div className="min-h-screen font-sans selection:bg-blue-100 selection:text-blue-900">
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 md:h-20">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                <GraduationCap size={24} />
+              </div>
+              <span className="text-xl font-bold text-slate-900 tracking-tight">Miss Sareeta</span>
+            </div>
+            
+            <div className="hidden md:flex items-center gap-8">
+              <button onClick={() => scrollToSection('home')} className="text-slate-600 hover:text-blue-600 font-medium transition-colors cursor-pointer">Home</button>
+              <button onClick={() => scrollToSection('services')} className="text-slate-600 hover:text-blue-600 font-medium transition-colors cursor-pointer">Services</button>
+              <button onClick={() => scrollToSection('about')} className="text-slate-600 hover:text-blue-600 font-medium transition-colors cursor-pointer">About</button>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-sm hover:shadow-md cursor-pointer"
+              >
+                Contact Me
+              </button>
+            </div>
+            
+            <div className="md:hidden">
+              <button onClick={() => scrollToSection('contact')} className="bg-blue-600 text-white p-2 rounded-lg">
+                <Phone size={20} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main>
+        {/* Hero Section */}
+        <section id="home" className="pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-sm font-semibold mb-6">
+                  <Star size={14} className="fill-blue-700" />
+                  <span>Expert Educational Support</span>
+                </div>
+                <h1 className="text-5xl md:text-7xl font-bold text-slate-900 leading-[1.1] mb-6">
+                  Grades <span className="text-blue-600">Going Up</span> with Miss Sareeta
+                </h1>
+                <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed max-w-lg">
+                  Empowering students to reach their full potential through personalized SEA prep, CSEC guidance, and comprehensive SBA assistance.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button 
+                    onClick={() => scrollToSection('contact')}
+                    className="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 flex items-center justify-center gap-2 group cursor-pointer"
+                  >
+                    Start Learning Now
+                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection('services')}
+                    className="bg-white text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    View Services
+                  </button>
+                </div>
+                
+                <div className="mt-12 flex items-center gap-6">
+                  <div className="flex -space-x-3">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 overflow-hidden">
+                        <img src={`https://picsum.photos/seed/student${i}/100/100`} alt="Student" referrerPolicy="no-referrer" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    <span className="font-bold text-slate-900">50+</span> Successful Students
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
+              >
+                <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+                  <img 
+                    src="https://picsum.photos/seed/education/800/1000" 
+                    alt="Education" 
+                    className="w-full h-auto object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                {/* Floating Elements */}
+                <motion.div 
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl z-20 flex items-center gap-3"
+                >
+                  <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600">
+                    <Award size={20} />
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-500 font-medium">Success Rate</div>
+                    <div className="text-lg font-bold text-slate-900">98%</div>
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+                  className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl z-20 flex items-center gap-3"
+                >
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                    <Users size={20} />
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-500 font-medium">Active Students</div>
+                    <div className="text-lg font-bold text-slate-900">25+</div>
+                  </div>
+                </motion.div>
+                
+                {/* Background Blobs */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-100 rounded-full blur-3xl -z-10 opacity-50" />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section id="services" className="py-24 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <SectionHeading className="text-center">Our Specialized Services</SectionHeading>
+              <p className="text-slate-600 text-lg">
+                We provide tailored educational support across various levels to ensure every student achieves their academic goals.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <ServiceCard 
+                icon={BookOpen}
+                title="SEA Prep"
+                description="Comprehensive preparation for the Secondary Entrance Assessment. We focus on Language Arts, Mathematics, and Creative Writing to build confidence and competence."
+                delay={0.1}
+              />
+              <ServiceCard 
+                icon={GraduationCap}
+                title="CSEC Tutoring"
+                description="Expert guidance for Caribbean Secondary Education Certificate subjects. Personalized lesson plans to master complex topics and excel in examinations."
+                delay={0.2}
+              />
+              <ServiceCard 
+                icon={CheckCircle}
+                title="SBA Help"
+                description="Professional assistance with School-Based Assessments. We help students structure, research, and refine their projects for maximum marks."
+                delay={0.3}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Features / Why Us */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              <div className="order-2 md:order-1">
+                <img 
+                  src="https://picsum.photos/seed/learning/800/600" 
+                  alt="Learning Environment" 
+                  className="rounded-3xl shadow-lg"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div className="order-1 md:order-2">
+                <SectionHeading>Why Choose Miss Sareeta?</SectionHeading>
+                <p className="text-slate-600 text-lg mb-8">
+                  With years of experience and a passion for teaching, I provide more than just tutoring—I provide a roadmap to success.
+                </p>
+                
+                <div className="space-y-6">
+                  {[
+                    { title: "Personalized Attention", desc: "Every student learns differently. I adapt my teaching style to fit individual needs.", icon: Users },
+                    { title: "Proven Results", desc: "My students consistently show significant improvement in their grades and confidence.", icon: Star },
+                    { title: "Flexible Scheduling", desc: "I offer sessions that fit into your busy life, including weekends and evenings.", icon: Clock },
+                  ].map((feature, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex gap-4"
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                        <feature.icon size={24} />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-slate-900 mb-1">{feature.title}</h4>
+                        <p className="text-slate-600">{feature.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" className="py-24 bg-blue-600 text-white overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-3xl -mr-32 -mt-32 opacity-50" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-700 rounded-full blur-3xl -ml-32 -mb-32 opacity-50" />
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="max-w-3xl">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-5xl font-bold mb-8">Dedicated to Your Academic Excellence</h2>
+                <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+                  "My mission is to transform the educational experience from a challenge into a triumph. I believe that with the right guidance, every student can see their grades go up and their confidence soar."
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-blue-400 border-2 border-white overflow-hidden">
+                    <img src="https://picsum.photos/seed/teacher/100/100" alt="Miss Sareeta" referrerPolicy="no-referrer" />
+                  </div>
+                  <div>
+                    <div className="text-xl font-bold">Miss Sareeta</div>
+                    <div className="text-blue-200">Lead Educator & Mentor</div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-16">
+              <div>
+                <SectionHeading>Get In Touch</SectionHeading>
+                <p className="text-slate-600 text-lg mb-10">
+                  Have questions or ready to start? Reach out today and let's discuss how we can help your grades go up!
+                </p>
+                
+                <div className="space-y-8">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 flex-shrink-0">
+                      <Phone size={24} />
+                    </div>
+                    <div>
+                      <div className="text-sm text-slate-500 font-medium mb-1">Call or WhatsApp</div>
+                      <a href="tel:18683799751" className="text-2xl font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                        1 (868) 379-9751
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 flex-shrink-0">
+                      <Mail size={24} />
+                    </div>
+                    <div>
+                      <div className="text-sm text-slate-500 font-medium mb-1">Email Us</div>
+                      <div className="text-xl font-bold text-slate-900">contact@misssareeta.com</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 flex-shrink-0">
+                      <MapPin size={24} />
+                    </div>
+                    <div>
+                      <div className="text-sm text-slate-500 font-medium mb-1">Location</div>
+                      <div className="text-xl font-bold text-slate-900">Trinidad and Tobago</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-slate-50 p-8 md:p-10 rounded-3xl border border-slate-100"
+              >
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Send a Message</h3>
+                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-slate-700">Name</label>
+                      <input type="text" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" placeholder="Your Name" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-slate-700">Phone</label>
+                      <input type="text" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" placeholder="Your Phone" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-slate-700">Service Interested In</label>
+                    <select className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                      <option>SEA Prep</option>
+                      <option>CSEC Help</option>
+                      <option>SBA Assistance</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-slate-700">Message</label>
+                    <textarea rows={4} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" placeholder="How can I help you?"></textarea>
+                  </div>
+                  <button className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 cursor-pointer">
+                    Send Message
+                  </button>
+                </form>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                <GraduationCap size={18} />
+              </div>
+              <span className="text-xl font-bold text-white tracking-tight">Miss Sareeta</span>
+            </div>
+            
+            <div className="flex gap-8 text-sm">
+              <button onClick={() => scrollToSection('home')} className="hover:text-white transition-colors cursor-pointer">Home</button>
+              <button onClick={() => scrollToSection('services')} className="hover:text-white transition-colors cursor-pointer">Services</button>
+              <button onClick={() => scrollToSection('about')} className="hover:text-white transition-colors cursor-pointer">About</button>
+              <button onClick={() => scrollToSection('contact')} className="hover:text-white transition-colors cursor-pointer">Contact</button>
+            </div>
+            
+            <div className="text-sm">
+              © 2026 Miss Sareeta. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
